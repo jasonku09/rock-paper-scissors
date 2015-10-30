@@ -1,0 +1,91 @@
+<head>
+  <title>rock-paper-scissors</title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body>
+</body>
+
+<template name="board">
+  <div id="main-container">
+    <div class="toolbar">
+      Rock, Paper, Scissors
+      {{#if isAdmin}}
+        <button id="reset">Reset History</button>
+      {{/if}}
+    </div>
+
+    <div class="player-container">
+      <div class="player-box">
+
+        {{#if isPlayerOne}}
+          <h5>You</h5>
+        {{else}}
+          <h5>Player One</h5>
+        {{/if}}
+
+        <div class="player-choice">
+          {{#if isPlayerOne}}
+            <img id="playerOneImage" src="images/default.png">
+          {{else}}
+            {{#if playerOneSelected}}
+              <h4>Player 1 has made a choice</h4>
+            {{else}}
+              <h4>Player 1 is choosing...</h4>
+            {{/if}}
+          {{/if}}
+        </div>
+
+        <div>WINS: {{playerOneScore}}</div>
+
+      </div>
+      <div class="player-box">
+
+        {{#if isPlayerTwo}}
+          <h5>You</h5>
+        {{else}}
+          <h5>Player Two</h5>
+        {{/if}}
+
+        <div class="player-choice">
+          {{#if isPlayerTwo}}
+            <img id="playerTwoImage" src="images/default.png">
+          {{else}}
+            {{#if playerTwoSelected}}
+              <h4>Player 2 has made a choice</h4>
+            {{else}}
+              <h4>Player 2 is choosing...</h4>
+            {{/if}}
+          {{/if}}
+        </div>
+
+        <div>WINS: {{playerTwoScore}}</div>
+
+      </div>
+    </div>
+    {{#if isPlayer}}
+      <div class="choice-container">
+        <h3>Make your Selection</h3>
+        <div>
+          <button id="rock">Rock</button>
+          <button id="paper">Paper</button>
+          <button id="scissors">Scissors</button>
+        </div>
+      </div>
+    {{/if}}
+
+    <div id="history-container">
+      <div>Game History</div>
+        {{#each pastGameResults}}
+          {{> gameResults}}
+        {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="gameResults">
+  <div class="history-item">
+    <h5>Winner: {{winner}}</h5>
+    <h5>{{playerOneSelection}} vs {{playerTwoSelection}}</h5>
+  </div>
+</template>
